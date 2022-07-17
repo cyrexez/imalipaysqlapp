@@ -1,0 +1,90 @@
+/*Question 1 */
+Drop table IF EXISTS Countries;
+CREATE TABLE Countries(
+    country_id VARCHAR(50) NOT NULL ,
+    country_name VARCHAR(50) NOT NULL,
+    region_id INT NULL
+
+);
+
+
+/*Question 2 */
+INSERT INTO Countries( country_id,country_name,region_id) VALUES 
+('C1','India',1002) ,
+('C2','USA',NULL),
+('C3','UK', NULL),
+('C4','India',1001),
+('C5','USA',1007),
+('C6','UK',1003);
+
+Select * FROM Countries;
+/*Question 3 */
+CREATE TABLE dup_countries (LIKE Countries);
+INSERT INTO dup_countries SELECT * FROM Countries;
+
+/*Question 4 */
+ALTER TABLE Countries
+ADD national_anthem varchar(400) NULL;
+
+/*Question 5 */
+/* it doesnt work because region_id has some null values*/
+ALTER TABLE Countries
+ADD CONSTRAINT PK_Countries PRIMARY KEY(country_id,region_id);
+
+/*Question 6*/
+/*No foreign keys so nothing to drop, so shows error*/
+ALTER TABLE Countries
+DROP CONSTRAINT FK_Countries;
+
+/*Question 7 */
+ALTER TABLE Countries 
+ALTER COLUMN national_anthem TYPE TEXT ;
+
+/* Question 8*/
+CREATE TABLE employeesdept(
+    department_id INT NOT NULL,
+    department decimal NULL
+    );
+    INSERT INTO employeesdept(department_id, department) VALUES 
+(40,1),
+(90,1),
+(110,1);
+UPDATE employeesdept set department=department*1.25 
+WHERE department_id=40;
+UPDATE employeesdept set department=department*1.15 
+WHERE department_id=90;
+UPDATE employeesdept set department=department*1.10 
+WHERE department_id=110;
+Select * FROM employeesdept;
+
+/* Question 9*/
+CREATE TABLE jobs(
+JOB_ID INT NOT NULL UNIQUE PRIMARY KEY,
+JOB_TITLE varchar(35) NOT NULL DEFAULT '',
+MIN_SALARY decimal(6,0) DEFAULT 8000,
+MAX_SALARY decimal(6,0) DEFAULT NULL
+);
+CREATE TABLE employees(
+    employee_id Serial primary key,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    job_id INT NOT NULL,
+    salary Decimal,
+    FOREIGN KEY (job_id) references jobs(job_id),
+    CONSTRAINT jobs_fk FOREIGN KEY (job_id)
+    REFERENCES jobs(job_id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+
+);
+
+/* Programming */
+Create table user_details(
+    id SERIAL PRIMARY KEY,
+    name varchar(255),
+    loan_payment decimal,
+    user_loan decimal,
+    loan_balance decimal
+);
+
+
