@@ -4,7 +4,7 @@ npm i nodemon,
 
 npm i pg 
 
-
+the text file contauns the answers to the 8 questions in the assessment
 
 
 
